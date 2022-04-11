@@ -1,5 +1,5 @@
 export function getCarform() {
-  return `
+  return /*html*/`
   <form onsubmit="app.carsController.addCar()">
     <div class="mb-3 d-flex justify-content-between">
       <div>
