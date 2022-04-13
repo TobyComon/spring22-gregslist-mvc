@@ -1,6 +1,6 @@
 export function getHouseform() {
   return /*html*/ `
-  <form onsubmit="app.housesController.addHouse()">
+  <form onsubmit="app.housesController.handleSubmit()">
     <div class="mb-3 d-flex justify-content-between">
       <div>
         <label for="bedrooms" class="form-label">Bedrooms</label>
@@ -16,13 +16,11 @@ export function getHouseform() {
     <div class="mb-3 d-flex justify-content-between">
       
       <div>
-        <label for="pets" class="form-label">Pets</label>
-        <input type="pets" class="form-control" name="pets" id="pets" aria-describedby="pets" placeholder="Pets..."required>
+        <label for="levels" class="form-label">Levels</label>
+        <input type="levels" class="form-control" name="levels" id="levels" aria-describedby="levels" placeholder="Levels..."required>
       </div>
       <div>
-        <label for="parking" class="form-label">Parking</label>
-        <input type="text" class="form-control" name="parking" id="parking" aria-describedby="parking"
-          placeholder="Parking..." required>
+      
       </div>
       
     </div>
@@ -41,7 +39,7 @@ export function getHouseform() {
     <div class="mb-3">
       <div>
         <label for="img" class="form-label">Image Url</label>
-        <input type="url" class="form-control" name="img" id="img" aria-describedby="img"
+        <input type="url" class="form-control" name="imgUrl" id="img" aria-describedby="img"
           placeholder="Image Url..." required>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { Pop } from "../Utils/Pop.js";
 
 
 function _drawHouses() {
+  console.log("draw houses");
   let housesCardsTemplate = ''
 
   ProxyState.houses.forEach(house => housesCardsTemplate += house.CardTemplate)
@@ -19,31 +20,46 @@ function _drawHouses() {
   document.getElementById('add-listing-modal-label').innerText = 'Add House 🏠'
 }
 
+async function _getAllHouses() {
+  try {
+    await housesService.getAllHouses()
+  } catch (error) {
+    console.error(error);
+    Pop.toast(error.message, 'error')
+    
+  }
+}
+
 export class HousesController {
   //  Do I want to do anything on page load?
   constructor() {
+    _getAllHouses()
     ProxyState.on('houses', _drawHouses)
-    _drawHouses()
   }
 
-  addHouse() {
+  async handleSubmit(id) {
     // DO THIS like always
     try {
-      event.preventDefault()
+      window.event.preventDefault()
       /**@type {HTMLFormElement} */
       // @ts-ignore
-      const formElem = event.target
+      const formElem = window.event.target
       const formData = {
         bedrooms:  formElem.bedrooms.value,
         bathrooms: formElem.bathrooms.value,
         price: formElem.price.value,
+        levels: formElem.price.value,
         description: formElem.description.value,
         year: formElem.year.value,
-        parking: formElem.parking.value,
-        pets: formElem.pets.value,
-        img: formElem.img.value,
+        imgUrl: formElem.imgUrl.value,
       }
-      housesService.addHouse(formData)
+      debugger
+      if (id == undefined){
+        await housesService.addHouse(formData)
+      } else{
+        formData.id = id
+        await housesService.editHouse(formData)
+      }
 
       formElem.reset()
 
